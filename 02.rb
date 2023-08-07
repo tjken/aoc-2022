@@ -15,6 +15,7 @@ module Day02
     Y: 2,
     Z: 3
   }
+
   module Part1
 
     def self.score(game)
@@ -33,19 +34,22 @@ module Day02
 
   module Part2
     def self.score(game)
-      result = ($scores.fetch(game[1].to_sym) - 1) * 3
+      result = ($scores.fetch(game[1].to_sym) - 1) * 3 # X -> 0, Y -> 3, Z -> 6
       result += case result
                 when 0
-                  ($scores.fetch(game[0].to_sym) -1 )
+                  ($scores.fetch(game[0].to_sym) - 1)
                 when 3
                   $scores.fetch(game[0].to_sym)
                 when 6
                   ($scores.fetch(game[0].to_sym) % 3) + 1
                 end
+
       return 3 if result == 0 # Resolves a bug with inputs [A, X]
       result
     end
+
   end
+
   def self.run(input_file, additional_method)
     File.readlines(input_file, chomp:true)
         .map { |line| line.split(/ /)  }
