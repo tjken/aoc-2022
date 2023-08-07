@@ -15,7 +15,9 @@ def day_01(input_file)
   elves = numbers.map.with_index.to_a
            .sort_by { | v, _ | -v }
 
-  elves[0]
+  elves[0, 3]
 end
 
-puts day_01('inputs/01.txt')
+elves = day_01('inputs/01.txt')
+puts elves[0]
+puts elves.reduce(0) { |sum, elf| sum + elf[0] }
