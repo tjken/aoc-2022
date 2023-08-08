@@ -23,8 +23,16 @@ module Day03
   end
 
   module Part2
-    def run
+    def self.run(input_file)
+      elf_groups = []
+      File.readlines(input_file, chomp:true)
+          .map { |sack| Day03.priorities(sack) }
+          .each_slice(3) { |group| elf_groups.push(group) }
 
+      badges = []
+      elf_groups.each { |sack| badges.push((sack[0] & sack[1]) & sack[2]) }
+
+      badges.flatten.sum
     end
   end
 
@@ -44,3 +52,4 @@ end
 
 puts "--- Day 3: Rucksack Reorganization ---"
 puts Day03::Part1.run("inputs/03.txt")
+puts Day03::Part2.run("inputs/03.txt")
