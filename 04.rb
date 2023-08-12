@@ -21,9 +21,9 @@ ranges.each do |pair|
     shared_ranges.append(false)
   end
 
-  if shared_range.length > 0 ? overlapped_ranges.append(true)
+  shared_range.length > 0 ? overlapped_ranges.append(true)
        : overlapped_ranges.append(false)
-  end
+
 end
 
 puts shared_ranges.count(true)
