@@ -9,6 +9,7 @@ end
 
 ranges = read_assignment_pairs("inputs/04.txt")
 shared_ranges = []
+overlapped_ranges = []
 ranges.each do |pair|
   first = Range.new(pair.first[0], pair.first[1]).to_a
   last = Range.new(pair.last[0], pair.last[1]).to_a
@@ -19,6 +20,11 @@ ranges.each do |pair|
   else
     shared_ranges.append(false)
   end
+
+  if shared_range.length > 0 ? overlapped_ranges.append(true)
+       : overlapped_ranges.append(false)
+  end
 end
 
 puts shared_ranges.count(true)
+puts overlapped_ranges.count(true)
