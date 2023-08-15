@@ -8,14 +8,13 @@ def read_input(input_file)
 end
 
 def read_from_lines(index, lines)
-  # TODO: fix bug where an empty space will be added to an output
   # line_index is to find where a value for a specific crate is in a
   # line, based on how the input file is written
   line_index = (4 * index) + 1
   output = []
   lines.each do |line|
     value = line[line_index]
-    output.push(value) unless value.nil? || value.empty?
+    output.push(value) unless value.nil? || value == ' '
   end
   output
 end
@@ -32,10 +31,15 @@ end
 def get_move_list(move_lines)
   moves = []
   move_lines.each do |line|
+    # Moves are written as 'move x from y to z'
     moves.push(line.delete('movefrt').strip.split(' ').map(&:to_i))
   end
 
   moves
+end
+
+def run(crates, moves)
+
 end
 
 crates, moves = read_input('inputs/05_sample.txt')
