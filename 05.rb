@@ -3,7 +3,7 @@
 def read_input(input_file)
   lines = File.read(input_file).split("\n")
   crates = initialize_crates(lines.slice(0, lines.index('')).reverse)
-  moves = []
+  moves = get_move_list(lines.slice(lines.index('') + 1, lines.length))
   [crates, moves]
 end
 
@@ -27,6 +27,15 @@ def initialize_crates(crate_lines)
   end
 
   crates
+end
+
+def get_move_list(move_lines)
+  moves = []
+  move_lines.each do |line|
+    moves.push(line.delete('movefrt').strip.split(' ').map(&:to_i))
+  end
+
+  moves
 end
 
 crates, moves = read_input('inputs/05_sample.txt')
