@@ -39,10 +39,20 @@ def get_move_list(move_lines)
 end
 
 def run(crates, moves)
-
+  moves.each do |move|
+    number = move[0]
+    crates[move[1] - 1].pop(number).reverse.each do |crate|
+      crates[move[2] - 1].push(crate)
+    end
+  end
 end
 
-crates, moves = read_input('inputs/05_sample.txt')
+crates, moves = read_input('inputs/05.txt')
+run crates, moves
 
 puts '--- Day 5: Supply Stacks ---'
-p crates, moves
+p1_answer = []
+crates.each do |crate|
+  p1_answer.push(crate.last)
+end
+puts p1_answer.join
