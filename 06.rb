@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
-def run(file)
+def run(file, offset)
   File.readlines(file, chomp: true)
-      .map { |line| find_packet_start_index(line) }
+      .map { |line| find_packet_start_index(line, offset) }
 end
 
-def find_packet_start_index(string)
-  string.chars.each_with_index do |letter, index|
-    next if index < 3
+def find_packet_start_index(string, offset)
+  string.chars.each_with_index do |_, index|
+    next if index < offset - 1
 
-    return index + 1 unless string[index - 3, 4].chars.uniq.length < 4
+    return index + 1 unless string[index - (offset - 1), offset].chars.uniq.length < offset
   end
 end
 
 puts '--- Day 6: Tuning Trouble ---'
-puts run('inputs/06.txt')
+file = 'inputs/06.txt'
+puts run(file, 4)
+puts run(file, 14)
